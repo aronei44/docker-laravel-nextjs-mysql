@@ -1,6 +1,45 @@
 version: '3.7'
 
 services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/app/mysql
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - mega_network
+  php:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    command: 'php artisan serve --host=0.0.0.0'
+    container_name: php
+    volumes:
+      - ./api:/app/api
+    ports:
+      - "8000:8000"
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - mysql
+    networks:
+      - mega_network
   ui:
     container_name: ui
     build:
@@ -10,10 +49,11 @@ services:
       ENV_VARIABLE: ${ENV_VARIABLE}
       NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
       CHOKIDAR_USEPOLLING: "true"
+      API_HOST: ${API_HOST}
     volumes:
-      - ./ui:/var/www/html/ui
-      - /var/www/html/ui/node_modules
-      - /var/www/html/ui/.next
+      - ./ui:/app/ui
+      - /app/ui/node_modules
+      - /app/ui/.next
     restart: always
     ports:
       - 3000:3000

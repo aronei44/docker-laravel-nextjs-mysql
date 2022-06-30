@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-WORKDIR /var/www/html/ui
+WORKDIR /app/ui
 
 # Copy lock files if file exists
 COPY package.json yarn.lock* package-lock.json* ./
