@@ -31,6 +31,11 @@ example for get route list:
 docker container exec php php artisan route:list
 ```
 
+# ++ Feature
+
+- Hot Reload NextJs. you dont need rebuild container in development
+
+
 # Contributing
 
 you can contribute by clone this repo, create some changes and create PR
