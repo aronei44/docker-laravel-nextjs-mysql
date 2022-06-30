@@ -11,9 +11,9 @@ services:
       NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
       CHOKIDAR_USEPOLLING: "true"
     volumes:
-      - ./ui:/app/ui
-      - /app/ui/node_modules
-      - /app/ui/.next
+      - ./ui:/var/www/html/ui
+      - /var/www/html/ui/node_modules
+      - /var/www/html/ui/.next
     restart: always
     ports:
       - 3000:3000
