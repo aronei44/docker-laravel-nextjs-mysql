@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  ui:
+    container_name: ui
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    environment:
+      ENV_VARIABLE: ${ENV_VARIABLE}
+      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./ui:/app/ui
+      - /app/ui/node_modules
+      - /app/ui/.next
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - mega_network
+
+networks:
+  mega_network:
