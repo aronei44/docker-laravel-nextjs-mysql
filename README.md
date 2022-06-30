@@ -11,6 +11,7 @@ Create services Laravel, NextJs and Mysql with Docker Compose
 ```
 git clone https://github.com/aronei44/docker-laravel-nextjs-mysql.git your-project-name
 cd your-project-name
+cp .env.sample .env
 docker-compose up --build -d
 ```
 
