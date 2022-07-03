@@ -6,18 +6,8 @@ RUN curl -sS https://getcomposer.org/installer​ | php -- \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-
 WORKDIR /app/api
 
-
 COPY . .
-ENV APP_NAME=Laravel
-ENV APP_ENV=local
-ENV APP_KEY=base64:9htXBUKS126kIxUSBJRLGTmYLR572LZjtznZl9ez9IU=
-# I hope you change app key value
-ENV APP_DEBUG=true
-ENV APP_URL=http://localhost
-
-
 
 RUN composer install
