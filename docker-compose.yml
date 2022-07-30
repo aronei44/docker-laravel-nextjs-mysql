@@ -60,7 +60,7 @@ services:
       - ./ui:/app/ui
       - /app/ui/node_modules
       - /app/ui/.next
-    restart: always
+    restart: unless-stopped
     ports:
       - 3000:3000
     networks:
