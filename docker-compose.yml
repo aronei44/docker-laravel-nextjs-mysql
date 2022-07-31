@@ -62,7 +62,7 @@ services:
       - /app/ui/.next
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - 80:3000
     networks:
       - mega_network
 
