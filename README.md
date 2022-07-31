@@ -35,6 +35,13 @@ docker container exec php php artisan route:list
 
 - Hot Reload NextJs. you dont need rebuild container in development
 
+# Development
+
+- For frontend, use port 80 or you just need open 127.0.0.1 or http://localhost
+
+- For backend, use port 8000 or you just need open 127.0.0.1:8000 or http://localhost:8000
+
+
 
 # Contributing
 
